@@ -543,16 +543,29 @@ body {
   height: 50px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 15px;
-  /* backdrop-filter: blur(60px); */
   right: 20px;
   top: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.video_recording_buttons_container button {
+  color: #fff;
+}
+
+#pause_recording_button {
+  color: #dfee63;
+  height: 28px;
+}
+
+#resume_recording_button {
+  color: #8bf79d;
+  height: 28px;
 }
 
 #stop_recording_button {
-  color: white;
+  color: #ee5d94;
   height: 28px;
 }
 

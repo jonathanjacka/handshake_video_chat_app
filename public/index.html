@@ -90,7 +90,7 @@
           <div class="local_video_container">
             <video src="" class="local_video" id="local_video" muted autoplay></video>
           </div>
-          <div class="call_buttons_container" id="call_buttons">
+          <div class="call_buttons_container display_none" id="call_buttons">
             <button class="call_button_small" id="mic_button">
               <i class="fas fa-microphone fa-2x" id='mic_button_image'></i>
             </button>
@@ -105,6 +105,22 @@
             </button>
             <button class="call_button_small" id="start_recording_button">
               <i class="fas fa-record-vinyl fa-2x" id='start_recording_button_image'></i>
+            </button>
+          </div>
+          <div class="finish_chat_button_container display_none" id="finish_chat_button_container">
+            <button class="call_button_large" id="finish_chat_call_button">
+              <i class="fas fa-unlink fa-2x" id='finish_chat_button_image'></i>
+            </button>
+          </div>
+          <div class="video_recording_buttons_container" id="video_recording_buttons">
+            <button class="pause_recording_button" id="pause_recording_button">
+              <i class="fas fa-pause fa-2x"></i>
+            </button>
+            <button class="resume_recording_button display_none" id="resume_recording_button">
+              <i class="fas fa-play-circle fa-2x"></i>
+            </button>
+            <button class="stop_recording_button" id="stop_recording_button">
+              <i class="fas fa-stop-circle fa-2x"></i>
             </button>
           </div>
         </div>
