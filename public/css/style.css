@@ -1,5 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #dadada;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #fff;
+}
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #dadada;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #fff;
+}
+
 button {
   background: transparent;
   box-shadow: 0px 0px 0px transparent;
@@ -18,7 +35,6 @@ button:hover {
 button:active {
   outline: none;
   border: none;
-
   transform: scale(0.95);
 }
 
@@ -61,7 +77,7 @@ body {
 
 .call_container {
   width: 50%;
-  /* height: 100%; */
+  height: 100%;
 }
 
 .messenger_container {
@@ -84,7 +100,7 @@ body {
 
 .logo_container img {
   display: block;
-  width: 50%;
+  width: 30%;
   margin: 0 auto;
 }
 
@@ -95,10 +111,6 @@ body {
   width: 100%;
   margin: 0;
 }
-
-/* .description_container {
-  margin: 0 40px; 
-} */
 
 .description_container_paragraph {
   font-weight: 500;
@@ -111,7 +123,6 @@ body {
 
 .personal_code_container {
   background: rgba(196, 196, 196, 0.2);
-  /* backdrop-filter: blur(80px); */
   border-radius: 15px;
   width: 100%;
   display: flex;
@@ -167,19 +178,16 @@ body {
   height: 40px;
 }
 
-.personal_code_connecting_input input {
-  font-family: 'Nunito', sans-serif;
-}
-
 .personal_code_input:focus {
   outline: 1px solid #fff;
 }
 
 .personal_code_input {
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
   width: 100%;
   height: 100%;
   background: rgba(196, 196, 196, 0.2);
-  /* backdrop-filter: blur(80px); */
   border-radius: 8px;
   border: none;
   color: white;
@@ -192,9 +200,8 @@ body {
 }
 
 .connecting_button {
-  width: calc(70% - 10px);
+  width: calc(80% - 10px);
   height: 55px;
-  width: 100px;
   margin: 0 20px;
   padding: 0 20px;
   background: #757ae2;
@@ -353,7 +360,12 @@ body {
   height: calc(100% - 70px);
   margin: 30px 40px 40px 40px;
   border-radius: 15px;
-  background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+  background: rgb(122, 130, 243);
+  background: radial-gradient(
+    circle,
+    rgba(122, 130, 243, 1) 2%,
+    rgba(163, 138, 255, 1) 98%
+  );
   /* background-image: url('../utils/images/logo.png'); */
 }
 
@@ -409,19 +421,33 @@ body {
 }
 
 .call_button_small {
+  color: #fff;
   width: 50px;
   height: 50px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 50px;
-  /* transition: 0.3s; */
+  transition: 0.3s;
 }
 
 .call_button_large {
+  color: #fff;
   width: 75px;
   height: 75px;
   border-radius: 75px;
   background: #fc5d5b;
-  /* transition: 0.3s; */
+  transition: 0.3s;
+}
+
+#hang_up_button {
+  transform: rotate(135deg);
+}
+
+#hang_up_button:active {
+  transform: scale(0.95) rotate(135deg);
+}
+
+#start_recording_button {
+  border: 2px solid #fc5d5b;
 }
 
 .dialog_wrapper {

@@ -40,8 +40,10 @@
           </div>
         </div>
 
+        <hr style="color: #fff; width: 100%; margin: 0;">
+
         <div class="personal_code_connecting_container">
-          <p class="personal_code_connecting_paragraph">Personal Code</p>
+          <p class="personal_code_connecting_paragraph">Connect with a Personal Code</p>
           <div class="personal_code_connecting_input_container">
             <input type="text" class="personal_code_input" id="personal_code_input" placeholder="Enter someone's personal code to connect...">
           </div>
@@ -79,7 +81,34 @@
       </div>
 
       <!-- Call Container -->
-      <div class="call_container"></div>
+      <div class="call_container">
+        <div class="videos_container">
+          <div id="video_placeholder" class="videos_placeholder">
+            <img src="public/utils/images/handshakeLogo1.png" alt="main logo" />
+          </div>
+          <video class='remote_video display_none' autoplay id="remote_video"></video>
+          <div class="local_video_container">
+            <video src="" class="local_video" id="local_video" muted autoplay></video>
+          </div>
+          <div class="call_buttons_container" id="call_buttons">
+            <button class="call_button_small" id="mic_button">
+              <i class="fas fa-microphone fa-2x" id='mic_button_image'></i>
+            </button>
+            <button class="call_button_small" id="camera_button">
+              <i class="fas fa-camera fa-2x" id='camera_button_image'></i>
+            </button>
+            <button class="call_button_large" id="hang_up_button">
+              <i class="fas fa-phone fa-2x" id='hang_up_button_image'></i>
+            </button>
+            <button class="call_button_small" id="screen_sharing_button">
+              <i class="fas fa-share-square fa-2x" id='screen_sharing_button_image'></i>
+            </button>
+            <button class="call_button_small" id="start_recording_button">
+              <i class="fas fa-record-vinyl fa-2x" id='start_recording_button_image'></i>
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- Messenger -->
       <div class="messenger_container">
