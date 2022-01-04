@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titan+One&display=swap');
 
 ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
@@ -82,8 +82,13 @@ body {
 
 .messenger_container {
   width: 25%;
-  /* height: 100%; */
-  background: #f4f9fd;
+  height: 100%;
+  background: rgb(254, 246, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(254, 246, 255, 1) 0%,
+    rgba(223, 210, 255, 1) 100%
+  );
   display: flex;
   flex-direction: column;
 }
@@ -105,8 +110,8 @@ body {
 }
 
 .logo_container h2 {
-  font-family: 'Bungee Shade', cursive;
-  font-size: 2rem;
+  font-family: 'Titan One', 'Nunito', sans-serif;
+  font-size: 3rem;
   text-align: center;
   width: 100%;
   margin: 0;
@@ -281,32 +286,51 @@ body {
 }
 
 .new_message_container {
-  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-bottom: 1rem;
 }
+
+.send_message_button {
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
+  background: #fe9eec;
+  border-radius: 8px;
+  margin-right: 0 20px;
+}
+
 .new_message_input {
-  margin: 0 40px;
-  margin-bottom: 30px;
-  width: calc(100% - 80px);
-  height: 60px;
-  color: #676f7a;
+  font-family: 'Nunito', sans-serif;
+  background: radial-gradient(
+    circle,
+    rgba(122, 130, 243, 1) 2%,
+    rgba(163, 138, 255, 1) 98%
+  );
+  width: calc(100% - 120px);
+
+  padding: 20px;
+  color: #fff;
   font-size: 16px;
   font-weight: 400;
   border: 1px solid #d5deeb;
   border-radius: 15px;
   box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
-  padding: 0 60px 0 20px;
-  z-index: 2;
 }
 
 .new_message_input:focus {
   outline: none;
-  color: #676f7a;
+  color: #fff;
 }
 
 .messages_container {
+  height: 100%;
   flex-grow: 1;
   margin: 40px 30px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .message_left_container {
@@ -337,22 +361,6 @@ body {
   padding: 20px 13px;
   color: #ffffff;
   min-width: 60px;
-}
-
-.send_message_button {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  right: 50px;
-  top: 10px;
-  box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
-  background: linear-gradient(180deg, #ff9519 0%, #ffba6a 100%);
-  border-radius: 8px;
-}
-
-.send_message_button_image {
-  max-width: 100%;
-  max-height: 100%;
 }
 
 .videos_container {
