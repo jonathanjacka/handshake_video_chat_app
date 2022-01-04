@@ -5,10 +5,11 @@ button {
   box-shadow: 0px 0px 0px transparent;
   border: 0px solid transparent;
   text-shadow: 0px 0px 0px transparent;
+  cursor: pointer;
 }
 
 button:hover {
-  opacity: 0.5;
+  opacity: 0.8;
   box-shadow: 0px 0px 0px transparent;
   border: 0px solid transparent;
   text-shadow: 0px 0px 0px transparent;
@@ -17,6 +18,8 @@ button:hover {
 button:active {
   outline: none;
   border: none;
+
+  transform: scale(0.95);
 }
 
 button:focus {
@@ -51,7 +54,7 @@ body {
   padding: 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   position: relative;
 }
@@ -102,12 +105,15 @@ body {
   font-size: 16px;
   color: white;
   text-align: center;
+  padding: 0;
+  margin: 0;
 }
 
 .personal_code_container {
   background: rgba(196, 196, 196, 0.2);
   /* backdrop-filter: blur(80px); */
   border-radius: 15px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -115,6 +121,7 @@ body {
 
 .personal_code_title_container {
   padding: 0 25px;
+  text-align: center;
 }
 
 .personal_code_title_paragraph {
@@ -141,10 +148,10 @@ body {
   background: #757ae2;
   color: #fff;
   font-family: inherit;
-  transition: 0.5s;
 }
 
 .personal_code_connecting_container {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -195,7 +202,6 @@ body {
   font-family: inherit;
   font-weight: 600;
   border-radius: 15px;
-  transition: 0.5s;
 }
 
 #personal_code_chat_button,
@@ -209,6 +215,7 @@ body {
 }
 
 .stranger_connecting_container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin: 0 40px;
@@ -231,22 +238,28 @@ body {
 }
 
 .checkbox_container {
+  width: 100%;
   display: flex;
   margin: 0 40px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
   margin-bottom: 25px;
+  justify-content: center;
   align-items: center;
 }
 
 .checkbox_connection {
   width: 30px;
   height: 30px;
-  background: rgba(196, 196, 196, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  /* backdrop-filter: blur(80px); */
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s;
+  transform: scale(1.5);
+}
+
+.checkbox_connection input:hover {
+  cursor: pointer;
 }
 
 .checkbox_container_paragraph {
@@ -328,7 +341,6 @@ body {
   box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
   background: linear-gradient(180deg, #ff9519 0%, #ffba6a 100%);
   border-radius: 8px;
-  transition: 0.5s;
 }
 
 .send_message_button_image {
@@ -401,7 +413,7 @@ body {
   height: 50px;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 50px;
-  transition: 0.3s;
+  /* transition: 0.3s; */
 }
 
 .call_button_large {
@@ -409,7 +421,7 @@ body {
   height: 75px;
   border-radius: 75px;
   background: #fc5d5b;
-  transition: 0.3s;
+  /* transition: 0.3s; */
 }
 
 .dialog_wrapper {
@@ -475,7 +487,6 @@ body {
   background: linear-gradient(180deg, #00c920 0%, #2fe24b 100%);
   box-shadow: 0px 2px 42px 10px rgba(47, 226, 75, 0.15);
   border-radius: 15px;
-  transition: 0.5s;
 }
 
 .dialog_reject_call_button {
@@ -484,7 +495,6 @@ body {
   background: linear-gradient(180deg, #ff3b3b 0%, #ff6262 100%);
   box-shadow: 0px 2px 42px 10px rgba(255, 59, 59, 0.15);
   border-radius: 15px;
-  transition: 0.5s;
 }
 
 .dialog_button_image {
@@ -498,8 +508,7 @@ body {
   height: 100%;
   left: 0;
   top: 0;
-  background: rgba(196, 196, 196, 0.2);
-  /* backdrop-filter: blur(80px); */
+  background: rgba(196, 196, 196, 0.5);
 }
 
 .video_recording_buttons_container {
