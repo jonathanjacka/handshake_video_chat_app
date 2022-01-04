@@ -8,10 +8,6 @@
   /* Firefox 19+ */
   color: #fff;
 }
-:-ms-input-placeholder {
-  /* IE 10+ */
-  color: #dadada;
-}
 :-moz-placeholder {
   /* Firefox 18- */
   color: #fff;
@@ -295,12 +291,11 @@ body {
 
 .send_message_button {
   color: #fff;
-  width: 40px;
-  height: 40px;
+  width: 65px;
+  height: 65px;
   box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
   background: #fe9eec;
-  border-radius: 8px;
-  margin-right: 0 20px;
+  border-radius: 15px;
 }
 
 .new_message_input {
@@ -374,7 +369,6 @@ body {
     rgba(122, 130, 243, 1) 2%,
     rgba(163, 138, 255, 1) 98%
   );
-  /* background-image: url('../utils/images/logo.png'); */
 }
 
 .videos_placeholder {

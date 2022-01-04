@@ -132,7 +132,7 @@
         <div class="new_message_container" id="new_message">
           <input type="text" class="new_message_input" id="new_message_input" type='text' placeholder="Type your message...">
           <button class='send_message_button' id="send_message_button">
-            <i class="fas fa-comment-dots"></i>
+            <i class="fas fa-comment-dots fa-2x"></i>
           </button>
         </div>
       </div>
@@ -140,6 +140,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>  var socket = io();</script>
-    <script src="/public/js/main.js" type='script'></script>
+    <script src="/public/js/store.js" type='module'></script>
+    <script src="/public/js/main.js" type='module'></script>
 </body>
 </html>
