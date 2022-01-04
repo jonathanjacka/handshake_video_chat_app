@@ -36,7 +36,10 @@
           </div>
           <div class="personal_code_value_container">
             <p class="personal_code_value_code_value_paragraph" id="personal_code_paragraph">123456</p>
-            <button class="personal_code_copy_button" id="personal_code_copy_button"><i class="far fa-copy"></i></button>
+            <button class="personal_code_copy_button" id="personal_code_copy_button">
+              <i class="far fa-copy"></i>
+              <i class="fas fa-check display_none"></i>
+            </button>
           </div>
         </div>
 
@@ -140,7 +143,10 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>  var socket = io();</script>
+    <script src="/public/js/ui.js" type='module'></script>
+    <script src="/public/js/wss.js" type='module'></script>
     <script src="/public/js/store.js" type='module'></script>
+    <script src="/public/js/webRTCHandler.js" type='module'></script>
     <script src="/public/js/main.js" type='module'></script>
 </body>
 </html>

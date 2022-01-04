@@ -1,9 +1,13 @@
 import * as store from './store.js';
+import * as ui from './ui.js';
+import * as wss from './wss.js';
+import * as webRTCHandler from './webRTCHandler.js';
 
-socket.on('connect', () => {
-  console.log('Successfully connected to socket.io server', socket.id);
+//initialize socket.io connection
+wss.registerSocketEvents(socket);
 
-  store.setSocketId(socket.id);
+//Event for personal code copy button
+ui.copyPersonalCode(store);
 
-  console.log(store.getState().socketId);
-});
+//register action for Personal Code buttons
+ui.registerConnectionButtons(webRTCHandler.sendPreOffer);

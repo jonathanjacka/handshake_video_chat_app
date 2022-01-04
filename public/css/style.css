@@ -160,6 +160,7 @@ body {
   background: #757ae2;
   color: #fff;
   font-family: inherit;
+  transition: all 0.5s;
 }
 
 .personal_code_connecting_container {
