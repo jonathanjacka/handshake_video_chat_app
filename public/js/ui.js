@@ -24,22 +24,3 @@ export const copyPersonalCode = (store) => {
     }, 1500);
   });
 };
-
-//register event listeners for connection buttons
-export const registerConnectionButtons = (sendPreOffer) => {
-  const personalCodeChatButton = document.getElementById(
-    'personal_code_chat_button'
-  );
-  const personalCodeVideoButton = document.getElementById(
-    'personal_code_video_button'
-  );
-
-  personalCodeChatButton.addEventListener('click', () => {
-    console.log('Chat button clicked!');
-    sendPreOffer();
-  });
-  personalCodeVideoButton.addEventListener('click', () => {
-    console.log('Video button clicked!');
-    sendPreOffer();
-  });
-};
