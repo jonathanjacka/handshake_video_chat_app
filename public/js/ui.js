@@ -1,3 +1,6 @@
+import * as constants from './constants.js';
+import * as elements from './elements.js';
+
 export const updatePersonalCode = (personalCode) => {
   const personalCodeParagraph = document.getElementById(
     'personal_code_paragraph'
@@ -23,4 +26,15 @@ export const copyPersonalCode = (store) => {
       personalCodeCopyButton.style.background = '#757ae2';
     }, 1500);
   });
+};
+
+export const showIncomingCallDialogue = (
+  callType,
+  acceptCallHandler,
+  rejectCallHandler
+) => {
+  const callTypeInfo =
+    callType === constants.callType.CHAT_PERSONAL_CODE ? 'Chat' : 'Video';
+
+  const incomingCallDialogue = elements.getIncomingCallDialogue();
 };
