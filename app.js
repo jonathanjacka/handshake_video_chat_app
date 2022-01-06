@@ -22,14 +22,26 @@ app.get('/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 //Socket IO
 const io = new Server(server);
 let connectedPeers = [];
+
 io.on('connection', (socket) => {
   console.log('a user connected to socket.io server', socket.id);
   connectedPeers = [...connectedPeers, socket.id];
   console.log(connectedPeers);
 
   socket.on('pre-offer', (data) => {
-    console.log('preoffer!');
-    console.log(data);
+    const { caller2PersonalCode, callType } = data;
+    const connectedPeer = connectedPeers.find(
+      (socketID) => socketID === caller2PersonalCode
+    );
+
+    if (connectedPeer) {
+      const data = {
+        callerSocketId: socket.id,
+        callType,
+      };
+    }
+
+    io.to(caller2PersonalCode).emit('pre-offer', data);
   });
 
   socket.on('disconnect', () => {

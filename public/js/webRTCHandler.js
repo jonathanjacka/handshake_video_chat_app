@@ -8,3 +8,5 @@ export const sendPreOffer = (callType, caller2PersonalCode) => {
 
   wss.sendPreOffer(data);
 };
+
+export const handlePreOffer = (data) => console.log('PreOffer received', data);
