@@ -5,12 +5,25 @@ import * as ui from './ui.js';
 let connectedUserDetails;
 
 export const sendPreOffer = (callType, caller2PersonalCode) => {
-  const data = {
+  connectedUserDetails = {
     callType,
-    caller2PersonalCode,
+    socketId: caller2PersonalCode,
   };
 
-  wss.sendPreOffer(data);
+  if (
+    callType === constants.callType.CHAT_PERSONAL_CODE ||
+    callType === constants.callType.VIDEO_PERSONAL_CODE
+  ) {
+    const data = {
+      callType,
+      caller2PersonalCode,
+    };
+
+    ui.showCallingDialogue(callType, callingDialogueRejectHandler);
+    wss.sendPreOffer(data);
+  } else {
+    console.error('error in webRTCHandler.sendPreOffer');
+  }
 };
 
 export const handlePreOffer = (data) => {
@@ -30,9 +43,13 @@ export const handlePreOffer = (data) => {
 };
 
 const acceptCallHandler = () => {
-  console.log('Call accepted!');
+  console.log('Receiver accepted!');
 };
 
 const rejectCallHandler = () => {
-  console.log('Call rejected!');
+  console.log('Receiver rejected!');
+};
+
+const callingDialogueRejectHandler = () => {
+  console.log('Caller cancelled connection!');
 };

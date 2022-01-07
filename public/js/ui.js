@@ -36,5 +36,24 @@ export const showIncomingCallDialogue = (
   const callTypeInfo =
     callType === constants.callType.CHAT_PERSONAL_CODE ? 'Chat' : 'Video';
 
-  const incomingCallDialogue = elements.getIncomingCallDialogue();
+  const incomingCallDialogue = elements.getIncomingCallDialogue(callTypeInfo);
+
+  //remove any current children from dialogue container
+  const dialogue = document.getElementById('dialogue');
+  dialogue.querySelectorAll('*').forEach((child) => child.remove());
+  dialogue.appendChild(incomingCallDialogue);
+};
+
+export const showCallingDialogue = (callType, callingDialogueRejectHandler) => {
+  const callTypeInfo =
+    callType === constants.callType.CHAT_PERSONAL_CODE ? 'Chat' : 'Video';
+
+  const connectingDialogue = elements.getOutgoingConnectionDialogue(
+    callTypeInfo,
+    callingDialogueRejectHandler
+  );
+
+  const dialogue = document.getElementById('dialogue');
+  dialogue.querySelectorAll('*').forEach((child) => child.remove());
+  dialogue.appendChild(connectingDialogue);
 };

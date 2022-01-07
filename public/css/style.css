@@ -453,13 +453,13 @@ body {
   border: 2px solid #fc5d5b;
 }
 
-.dialog_wrapper {
+.dialogue_wrapper {
   position: fixed;
   z-index: 2;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  /* backdrop-filter: blur(30px); */
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(30px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -467,9 +467,9 @@ body {
   top: 0;
 }
 
-.dialog_content {
+.dialogue_content {
   width: 520px;
-  height: 530px;
+  max-height: 530px;
   background: white;
   border: 1px solid #d5deeb;
   box-shadow: 0px 2px 20px 5px rgba(10, 145, 219, 0.05);
@@ -480,37 +480,52 @@ body {
   justify-content: space-evenly;
 }
 
-.dialog_title {
+.dialogue_title {
   font-weight: 600;
   font-size: 22px;
   color: black;
 }
 
-.dialog_image_container {
+.dialogue_image_container {
   width: 275px;
   height: 275px;
+  margin-bottom: 25px;
   border-radius: 275px;
-  background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+  background: rgb(122, 130, 243);
+  background: radial-gradient(
+    circle,
+    rgba(122, 130, 243, 1) 2%,
+    rgba(163, 138, 255, 1) 98%
+  );
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.dialog_description {
+.dialogue_description {
   font-size: 20px;
   color: black;
   font-weight: 500;
   padding: 0 40px;
 }
 
-.dialog_button_container {
+.dialogue_button_container {
+  color: #fff;
+  padding-bottom: 30px;
   height: 55px;
   width: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
 }
 
-.dialog_accept_call_button {
+.dialogue_button_container button {
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+}
+
+.dialogue_accept_call_button {
   width: 180px;
   height: 55px;
   background: linear-gradient(180deg, #00c920 0%, #2fe24b 100%);
@@ -518,7 +533,7 @@ body {
   border-radius: 15px;
 }
 
-.dialog_reject_call_button {
+.dialogue_reject_call_button {
   width: 180px;
   height: 55px;
   background: linear-gradient(180deg, #ff3b3b 0%, #ff6262 100%);
@@ -526,7 +541,7 @@ body {
   border-radius: 15px;
 }
 
-.dialog_button_image {
+.dialogue_button_image {
   max-width: 100%;
   max-height: 100%;
 }
