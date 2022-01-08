@@ -59,6 +59,35 @@ export const showCallingDialogue = (callType, callingDialogueRejectHandler) => {
   dialogue.appendChild(connectingDialogue);
 };
 
+export const showInfoDialogue = (preOfferAnswer) => {
+  let infoDialogue = null;
+
+  if (preOfferAnswer === constants.preOfferAnswer.RECEIVER_NOT_FOUND) {
+    infoDialogue = elements.getInfoDialogue(
+      'Connection rejected',
+      'Receiver was not found - check your personal codes are correct'
+    );
+  } else if (preOfferAnswer === constants.preOfferAnswer.CALL_REJECTED) {
+    infoDialogue = elements.getInfoDialogue(
+      'Connection rejected',
+      'Receiver rejected your connection'
+    );
+  } else if (preOfferAnswer === constants.preOfferAnswer.CALL_UNAVAILABLE) {
+    infoDialogue = elements.getInfoDialogue(
+      'Connection rejected',
+      'Receiver is unavailable or busy'
+    );
+  } else {
+    infoDialogue = elements.getInfoDialogue(
+      'Connection rejected',
+      'There was an error in attempting to connect'
+    );
+  }
+  dialogue.appendChild(infoDialogue);
+
+  setTimeout(() => removeAllDialogues(), 4000);
+};
+
 export const removeAllDialogues = () => {
   const dialogue = document.getElementById('dialogue');
   dialogue.querySelectorAll('*').forEach((child) => child.remove());

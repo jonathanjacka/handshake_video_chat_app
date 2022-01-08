@@ -87,3 +87,10 @@ export const getOutgoingConnectionDialogue = (
 
   return dialogue;
 };
+
+export const getInfoDialogue = (title, description) => {
+  const dialogue = document.createElement('div');
+  dialogue.classList.add('dialogue_wrapper');
+
+  return dialogue;
+};

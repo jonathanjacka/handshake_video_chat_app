@@ -4,19 +4,20 @@ import * as ui from './ui.js';
 
 let connectedUserDetails;
 
-export const sendPreOffer = (callType, caller2PersonalCode) => {
+export const sendPreOffer = (callType, receiverPersonalCode) => {
   connectedUserDetails = {
     callType,
-    socketId: caller2PersonalCode,
+    socketId: receiverPersonalCode,
   };
 
+  console.log(connectedUserDetails);
   if (
     callType === constants.callType.CHAT_PERSONAL_CODE ||
     callType === constants.callType.VIDEO_PERSONAL_CODE
   ) {
     const data = {
       callType,
-      caller2PersonalCode,
+      receiverPersonalCode,
     };
 
     ui.showCallingDialogue(callType, callingDialogueRejectHandler);
@@ -68,17 +69,15 @@ const sendPreOfferAnswer = (preOfferAnswer) => {
 
 export const handlePreOfferAnswer = (data) => {
   const { preOfferAnswer } = data;
-
   console.log('PreOffer Answer handled: ', preOfferAnswer);
+
   ui.removeAllDialogues();
 
-  if (preOfferAnswer === constants.preOfferAnswer.CALLER_2_NOT_FOUND) {
-    //show dialogue that caller 2 has not been found
-  } else if (preOfferAnswer === constants.preOfferAnswer.CALL_ACCEPTED) {
-    //show dialogue that caller 2 accepts - send webRTC Offer
-  } else if (preOfferAnswer === constants.preOfferAnswer.CALL_REJECTED) {
-    //show dialogue that caller 2 rejects
+  if (!preOfferAnswer) {
+    console.error(`Preoffer answer error: ${preOfferAnswer}`);
   } else {
-    //show dialogue that caller 2 cannot cannot connect
+    preOfferAnswer === constants.preOfferAnswer.CALL_ACCEPTED
+      ? console.log('show dialogue that caller 2 accepts - send webRTC Offer')
+      : ui.showInfoDialogue(preOfferAnswer);
   }
 };

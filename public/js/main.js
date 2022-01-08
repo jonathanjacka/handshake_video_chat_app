@@ -19,18 +19,18 @@ const personalCodeVideoButton = document.getElementById(
 );
 //Personal Chat
 personalCodeChatButton.addEventListener('click', () => {
-  const caller2PersonalCode = document.getElementById(
+  const receiverPersonalCode = document.getElementById(
     'personal_code_input'
   ).value;
   const callType = constants.callType.CHAT_PERSONAL_CODE;
-  webRTCHandler.sendPreOffer(callType, caller2PersonalCode);
+  webRTCHandler.sendPreOffer(callType, receiverPersonalCode);
 });
 
 //Personal Video
 personalCodeVideoButton.addEventListener('click', () => {
-  const caller2PersonalCode = document.getElementById(
+  const receiverPersonalCode = document.getElementById(
     'personal_code_input'
   ).value;
   const callType = constants.callType.VIDEO_PERSONAL_CODE;
-  webRTCHandler.sendPreOffer(callType, caller2PersonalCode);
+  webRTCHandler.sendPreOffer(callType, receiverPersonalCode);
 });

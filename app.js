@@ -29,9 +29,9 @@ io.on('connection', (socket) => {
   console.log(connectedPeers);
 
   socket.on('pre-offer', (data) => {
-    const { caller2PersonalCode, callType } = data;
+    const { receiverPersonalCode, callType } = data;
     const connectedPeer = connectedPeers.find(
-      (socketID) => socketID === caller2PersonalCode
+      (socketID) => socketID === receiverPersonalCode
     );
 
     if (connectedPeer) {
@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
         callerSocketId: socket.id,
         callType,
       };
-      io.to(caller2PersonalCode).emit('pre-offer', data);
+      io.to(receiverPersonalCode).emit('pre-offer', data);
     }
   });
 
