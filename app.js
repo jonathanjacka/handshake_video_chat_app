@@ -24,7 +24,7 @@ const io = new Server(server);
 let connectedPeers = [];
 
 io.on('connection', (socket) => {
-  console.log('a user connected to socket.io server', socket.id);
+  console.log('a user connected to socket.io server: ', socket.id);
   connectedPeers = [...connectedPeers, socket.id];
   console.log(connectedPeers);
 
@@ -39,9 +39,18 @@ io.on('connection', (socket) => {
         callerSocketId: socket.id,
         callType,
       };
+      io.to(caller2PersonalCode).emit('pre-offer', data);
     }
+  });
 
-    io.to(caller2PersonalCode).emit('pre-offer', data);
+  socket.on('pre-offer-answer', (data) => {
+    const connectedPeer = connectedPeers.find(
+      (socketID) => socketID === data.callerSocketId
+    );
+
+    if (connectedPeer) {
+      io.to(data.callerSocketId).emit('pre-offer-answer', data);
+    }
   });
 
   socket.on('disconnect', () => {

@@ -25,6 +25,7 @@ personalCodeChatButton.addEventListener('click', () => {
   const callType = constants.callType.CHAT_PERSONAL_CODE;
   webRTCHandler.sendPreOffer(callType, caller2PersonalCode);
 });
+
 //Personal Video
 personalCodeVideoButton.addEventListener('click', () => {
   const caller2PersonalCode = document.getElementById(

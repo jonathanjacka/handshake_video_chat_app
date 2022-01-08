@@ -33,6 +33,7 @@ export const getIncomingCallDialogue = (
       ? '<i class="fas fa-phone"></i> Accept Call'
       : '<i class="fas fa-comment"></i> Accept Chat';
   buttonContainer.appendChild(acceptCallButton);
+  acceptCallButton.addEventListener('click', () => acceptCallHandler());
 
   const rejectCallButton = document.createElement('button');
   rejectCallButton.classList.add('dialogue_reject_call_button');
@@ -41,6 +42,7 @@ export const getIncomingCallDialogue = (
       ? '<i class="fas fa-phone-slash"></i> Reject Call'
       : '<i class="fas fa-comment-slash"></i> Reject Chat';
   buttonContainer.appendChild(rejectCallButton);
+  rejectCallButton.addEventListener('click', () => rejectCallHandler());
 
   dialogueContent.appendChild(title);
   dialogueContent.appendChild(imageContainer);
@@ -53,11 +55,7 @@ export const getOutgoingConnectionDialogue = (
   callTypeInfo,
   callingDialogueRejectHandler
 ) => {
-  console.log(
-    'Pushing outgoing connection dialogue:',
-    callTypeInfo,
-    callingDialogueRejectHandler
-  );
+  console.log('Pushing outgoing connection dialogue:');
 
   const dialogue = document.createElement('div');
   dialogue.classList.add('dialogue_wrapper');
@@ -80,6 +78,9 @@ export const getOutgoingConnectionDialogue = (
       ? '<i class="fas fa-phone-slash"></i> End Call Request'
       : '<i class="fas fa-comment-slash"></i> End Chat Request';
   buttonContainer.appendChild(rejectConnectionButton);
+  rejectConnectionButton.addEventListener('click', () =>
+    callingDialogueRejectHandler()
+  );
 
   dialogueContent.appendChild(title);
   dialogueContent.appendChild(buttonContainer);

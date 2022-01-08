@@ -36,11 +36,13 @@ export const showIncomingCallDialogue = (
   const callTypeInfo =
     callType === constants.callType.CHAT_PERSONAL_CODE ? 'Chat' : 'Video';
 
-  const incomingCallDialogue = elements.getIncomingCallDialogue(callTypeInfo);
+  const incomingCallDialogue = elements.getIncomingCallDialogue(
+    callTypeInfo,
+    acceptCallHandler,
+    rejectCallHandler
+  );
 
-  //remove any current children from dialogue container
-  const dialogue = document.getElementById('dialogue');
-  dialogue.querySelectorAll('*').forEach((child) => child.remove());
+  removeAllDialogues();
   dialogue.appendChild(incomingCallDialogue);
 };
 
@@ -53,7 +55,11 @@ export const showCallingDialogue = (callType, callingDialogueRejectHandler) => {
     callingDialogueRejectHandler
   );
 
+  removeAllDialogues();
+  dialogue.appendChild(connectingDialogue);
+};
+
+export const removeAllDialogues = () => {
   const dialogue = document.getElementById('dialogue');
   dialogue.querySelectorAll('*').forEach((child) => child.remove());
-  dialogue.appendChild(connectingDialogue);
 };
