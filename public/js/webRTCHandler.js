@@ -108,6 +108,7 @@ export const handlePreOffer = (data) => {
 
 const acceptCallHandler = () => {
   console.log('Receiver accepted!');
+  createPeerConnection();
   sendPreOfferAnswer(constants.preOfferAnswer.CALL_ACCEPTED);
   ui.showCallElements(connectedUserDetails.callType);
 };
@@ -130,7 +131,7 @@ const sendPreOfferAnswer = (preOfferAnswer) => {
   wss.sendPreOfferAnswer(data);
 };
 
-export const handlePreOfferAnswer = (data) => {
+export const handlePreOfferAnswer = async (data) => {
   const { preOfferAnswer } = data;
   console.log('PreOffer Answer handled: ', preOfferAnswer);
 
@@ -139,8 +140,27 @@ export const handlePreOfferAnswer = (data) => {
   if (!preOfferAnswer) {
     console.error(`Preoffer answer error: ${preOfferAnswer}`);
   } else {
-    preOfferAnswer === constants.preOfferAnswer.CALL_ACCEPTED
-      ? ui.showCallElements(connectedUserDetails.callType)
-      : ui.showInfoDialogue(preOfferAnswer);
+    if (!(preOfferAnswer === constants.preOfferAnswer.CALL_ACCEPTED)) {
+      ui.showInfoDialogue(preOfferAnswer);
+    } else {
+      ui.showCallElements(connectedUserDetails.callType);
+      createPeerConnection();
+      await sendWebRTCOffer();
+    }
   }
+};
+
+const sendWebRTCOffer = async () => {
+  console.log('Sending webRTC offer');
+  const offer = await peerConnection.createOffer();
+  await peerConnection.setLocalDescription(offer);
+  wss.sendDataUsingWebRTCSignaling({
+    connectedUserSocketId: connectedUserDetails.socketId,
+    type: constants.webRTCSignaling.OFFER,
+    offer,
+  });
+};
+
+export const handleWebRTCOffer = (data) => {
+  console.log(`Web RTC Offer came: ${data}`);
 };
