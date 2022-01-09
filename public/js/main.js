@@ -7,6 +7,8 @@ import * as constants from './constants.js';
 //initialize socket.io connection
 wss.registerSocketEvents(socket);
 
+//webRTCHandler.getLocalPreview();
+
 //Event for personal code copy button
 ui.copyPersonalCode(store);
 

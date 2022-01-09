@@ -1,8 +1,60 @@
+import * as store from './store.js';
 import * as wss from './wss.js';
 import * as constants from './constants.js';
 import * as ui from './ui.js';
 
 let connectedUserDetails;
+let peerConnection;
+
+const defaultContraints = {
+  audio: true,
+  video: true,
+};
+
+const configuration = {
+  iceServer: [
+    {
+      urls: 'stun:stun.1.google.com:13092',
+    },
+  ],
+};
+
+export const getLocalPreview = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(defaultContraints);
+    ui.updateLocalVideo(stream);
+    store.setLocalStream(stream);
+  } catch (error) {
+    console.error(
+      `An error occured while trying to access camera or video: ${error}`
+    );
+  }
+};
+
+const createPeerConnection = () => {
+  peerConnection = new RTCPeerConnection(configuration);
+  peerConnection.onicecandidate = (event) => {
+    console.log('Getting ice candidates from stun server');
+    if (event.candidate) {
+      //send our ice candidates to peer
+    }
+  };
+
+  peerConnection.onconnectionstatechange = (event) => {
+    if (peerConnection.connectionState === 'connected') {
+      console.log('Successfully connected to peer');
+    }
+  };
+
+  //receiving tracks for streaming
+  const remoteStream = new MediaStream();
+  store.setRemoteStream(remoteStream);
+  ui.updateRemoteVideo(remoteStream);
+
+  peerConnection.ontrack = (event) => {
+    remoteStream.addTrack(event.track);
+  };
+};
 
 export const sendPreOffer = (callType, receiverPersonalCode) => {
   connectedUserDetails = {

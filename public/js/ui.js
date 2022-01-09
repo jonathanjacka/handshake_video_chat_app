@@ -28,6 +28,13 @@ export const copyPersonalCode = (store) => {
   });
 };
 
+export const updateLocalVideo = (stream) => {
+  const localVideo = document.getElementById('local_video');
+  localVideo.srcObject = stream;
+
+  localVideo.addEventListener('loadeddata', () => localVideo.play());
+};
+
 export const showIncomingCallDialogue = (
   callType,
   acceptCallHandler,
