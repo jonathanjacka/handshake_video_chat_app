@@ -46,7 +46,7 @@ const createPeerConnection = () => {
     }
   };
 
-  //receiving tracks for streaming
+  //receiving remote tracks for streaming
   const remoteStream = new MediaStream();
   store.setRemoteStream(remoteStream);
   ui.updateRemoteVideo(remoteStream);
@@ -54,6 +54,16 @@ const createPeerConnection = () => {
   peerConnection.ontrack = (event) => {
     remoteStream.addTrack(event.track);
   };
+
+  //add our tracks to stream
+  if (
+    connectedUserDetails.callType === constants.callType.VIDEO_PERSONAL_CODE
+  ) {
+    const localStream = store.getState().localStream;
+    for (const track of localStream.getTracks()) {
+      peerConnection.addTrack(track, localStream);
+    }
+  }
 };
 
 export const sendPreOffer = (callType, receiverPersonalCode) => {
