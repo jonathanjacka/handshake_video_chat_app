@@ -47,6 +47,7 @@ export const handlePreOffer = (data) => {
 const acceptCallHandler = () => {
   console.log('Receiver accepted!');
   sendPreOfferAnswer(constants.preOfferAnswer.CALL_ACCEPTED);
+  ui.showCallElements(connectedUserDetails.callType);
 };
 
 const rejectCallHandler = () => {
@@ -77,7 +78,7 @@ export const handlePreOfferAnswer = (data) => {
     console.error(`Preoffer answer error: ${preOfferAnswer}`);
   } else {
     preOfferAnswer === constants.preOfferAnswer.CALL_ACCEPTED
-      ? console.log('show dialogue that caller 2 accepts - send webRTC Offer')
+      ? ui.showCallElements(connectedUserDetails.callType)
       : ui.showInfoDialogue(preOfferAnswer);
   }
 };
