@@ -131,7 +131,7 @@ const sendPreOfferAnswer = (preOfferAnswer) => {
   wss.sendPreOfferAnswer(data);
 };
 
-export const handlePreOfferAnswer = async (data) => {
+export const handlePreOfferAnswer = (data) => {
   const { preOfferAnswer } = data;
   console.log('PreOffer Answer handled: ', preOfferAnswer);
 
@@ -145,7 +145,7 @@ export const handlePreOfferAnswer = async (data) => {
     } else {
       ui.showCallElements(connectedUserDetails.callType);
       createPeerConnection();
-      await sendWebRTCOffer();
+      sendWebRTCOffer();
     }
   }
 };
@@ -162,5 +162,5 @@ const sendWebRTCOffer = async () => {
 };
 
 export const handleWebRTCOffer = (data) => {
-  console.log(`Web RTC Offer came: ${data}`);
+  console.log(`Web RTC Offer came:`, data);
 };

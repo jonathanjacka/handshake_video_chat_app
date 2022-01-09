@@ -35,6 +35,11 @@ export const updateLocalVideo = (stream) => {
   localVideo.addEventListener('loadeddata', () => localVideo.play());
 };
 
+export const updateRemoteVideo = (stream) => {
+  const remoteVideo = document.getElementById('remote_video');
+  remoteVideo.srcObject = stream;
+};
+
 export const showIncomingCallDialogue = (
   callType,
   acceptCallHandler,
