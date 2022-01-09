@@ -84,8 +84,6 @@ export const showInfoDialogue = (preOfferAnswer) => {
     );
   }
   dialogue.appendChild(infoDialogue);
-
-  setTimeout(() => removeAllDialogues(), 4000);
 };
 
 export const removeAllDialogues = () => {

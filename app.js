@@ -40,6 +40,11 @@ io.on('connection', (socket) => {
         callType,
       };
       io.to(receiverPersonalCode).emit('pre-offer', data);
+    } else {
+      const data = {
+        preOfferAnswer: 'RECEIVER_NOT_FOUND',
+      };
+      io.to(socket.id).emit('pre-offer-answer', data);
     }
   });
 

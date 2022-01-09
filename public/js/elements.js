@@ -92,5 +92,35 @@ export const getInfoDialogue = (title, description) => {
   const dialogue = document.createElement('div');
   dialogue.classList.add('dialogue_wrapper');
 
+  const dialogueContent = document.createElement('div');
+  dialogueContent.classList.add('dialogue_content');
+
+  const dialogueTitle = document.createElement('h3');
+  dialogueTitle.classList.add('dialogue_title');
+  dialogueTitle.innerText = `${title}`;
+
+  const dialogueDescription = document.createElement('p');
+  dialogueDescription.classList.add('dialogue_title');
+  dialogueDescription.innerText = `${description}`;
+
+  const imageContainer = document.createElement('div');
+  imageContainer.classList.add('dialogue_reject_container');
+  imageContainer.innerHTML = `<i class="fas fa-exclamation-triangle fa-7x"></i>`;
+
+  const closeBtnContainer = document.createElement('div');
+  closeBtnContainer.classList.add('dialogue_close_btn_container');
+  closeBtnContainer.innerHTML = '<i class="far fa-times-circle fa-2x"></i>';
+  closeBtnContainer.addEventListener('click', () => {
+    const dialogue = document.getElementById('dialogue');
+    dialogue.querySelectorAll('*').forEach((child) => child.remove());
+  });
+
+  dialogueContent.appendChild(dialogueTitle);
+  dialogueContent.appendChild(imageContainer);
+  dialogueContent.appendChild(dialogueDescription);
+  dialogueContent.appendChild(closeBtnContainer);
+
+  dialogue.appendChild(dialogueContent);
+
   return dialogue;
 };
