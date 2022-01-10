@@ -134,6 +134,23 @@ const showVideoCallElements = () => {
   disableDashboard();
 };
 
+//ui video call buttons
+export const updateMicButton = (micActive) => {
+  const micOn = '<i class="fas fa-microphone fa-2x" id="mic_button_image"></i>';
+  const micOff =
+    '<i class="fas fa-microphone-slash fa-2x" id="mic_button_image" style="color: #ee5d94;"></i>';
+  const micButton = document.getElementById('mic_button');
+  micButton.innerHTML = micActive ? micOn : micOff;
+};
+
+export const updateCameraButton = (cameraActive) => {
+  const camOn = '<i class="fas fa-video fa-2x" id="camera_button_image"></i>';
+  const camOff =
+    '<i class="fas fa-video-slash fa-2x" id="camera_button_image" style="color: #ee5d94;"></i>';
+  const cameraButton = document.getElementById('camera_button');
+  cameraButton.innerHTML = cameraActive ? camOn : camOff;
+};
+
 //ui helper functions
 
 export const removeAllDialogues = () => {
