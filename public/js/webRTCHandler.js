@@ -212,6 +212,7 @@ export const toggleScreenShare = async (screenSharingActive) => {
 
     store.setScreenSharingActive(!screenSharingActive);
     ui.updateLocalVideo(localStream);
+    ui.updateScreenShareButton(screenSharingActive);
   } else {
     console.log('Toggle Screen share');
     try {
@@ -230,6 +231,7 @@ export const toggleScreenShare = async (screenSharingActive) => {
       }
       store.setScreenSharingActive(!screenSharingActive);
       ui.updateLocalVideo(screenSharingStream);
+      ui.updateScreenShareButton(screenSharingActive);
     } catch (error) {
       console.error('Error sharing screen: ', error);
     }

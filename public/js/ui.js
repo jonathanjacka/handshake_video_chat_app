@@ -151,6 +151,11 @@ export const updateCameraButton = (cameraActive) => {
   cameraButton.innerHTML = cameraActive ? camOn : camOff;
 };
 
+export const updateScreenShareButton = (screenSharingActive) => {
+  const screenShareButton = document.getElementById('screen_sharing_button');
+  screenShareButton.style.color = screenSharingActive ? '#fff' : '#89E0AF';
+};
+
 //ui helper functions
 
 export const removeAllDialogues = () => {
