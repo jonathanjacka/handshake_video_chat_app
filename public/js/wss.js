@@ -22,6 +22,10 @@ export const registerSocketEvents = (socket) => {
     webRTCHandler.handlePreOfferAnswer(data);
   });
 
+  socket.on('user-ended-connection', () => {
+    webRTCHandler.handleUserTerminateConnection();
+  });
+
   socket.on('webRTC-signaling', (data) => {
     switch (data.type) {
       case constants.webRTCSignaling.OFFER:
@@ -49,4 +53,8 @@ export const sendPreOfferAnswer = (data) => {
 
 export const sendDataUsingWebRTCSignaling = (data) => {
   socketIO.emit('webRTC-signaling', data);
+};
+
+export const sendUserEndConnection = (data) => {
+  socketIO.emit('user-ended-connection', data);
 };

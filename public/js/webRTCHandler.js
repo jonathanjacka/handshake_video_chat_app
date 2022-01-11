@@ -256,3 +256,34 @@ export const toggleScreenShare = async (screenSharingActive) => {
     }
   }
 };
+
+//hang up related
+export const handleEndConnection = () => {
+  const data = {
+    connectedUserSocketId: connectedUserDetails.socketId,
+  };
+  wss.sendUserEndConnection(data);
+  closePeerConnection();
+};
+
+export const handleUserTerminateConnection = () => {
+  closePeerConnection();
+};
+
+const closePeerConnection = () => {
+  if (peerConnection) {
+    peerConnection.close();
+    peerConnection = null;
+  }
+
+  if (
+    connectedUserDetails.callType === constants.callType.VIDEO_PERSONAL_CODE ||
+    connectedUserDetails.callType === constants.callType.VIDEO_STRANGER
+  ) {
+    store.getState().localStream.getVideoTracks()[0].enabled = true;
+    store.getState().localStream.getAudioTracks()[0].enabled = true;
+
+    ui.updateUIAfterDisconnect(connectedUserDetails.callType);
+    connectedUserDetails = null;
+  }
+};

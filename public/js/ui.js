@@ -202,6 +202,37 @@ export const switchRecordingBtns = (switcForResumeBtn = false) => {
   }
 };
 
+//ui after hangup
+export const updateUIAfterDisconnect = (callType) => {
+  if (
+    callType === constants.callType.VIDEO_PERSONAL_CODE ||
+    callType === constants.callType.VIDEO_STRANGER
+  ) {
+    const callBtns = document.getElementById('call_buttons');
+    hideElement(callBtns);
+  } else {
+    const chatBtn = document.getElementById('finish_chat_button_container');
+    hideElement(chatBtn);
+  }
+
+  const messageInput = document.getElementById('new_message');
+  hideElement(messageInput);
+
+  clearMessenger();
+  updateMicButton(false);
+  updateCameraButton(false);
+
+  const remoteVideo = document.getElementById('remote_video');
+  hideElement(remoteVideo);
+
+  const videoPlaceholder = document.getElementById('video_placeholder');
+  showElement(videoPlaceholder);
+
+  removeAllDialogues();
+
+  enableDashboard();
+};
+
 //ui helper functions
 
 export const removeAllDialogues = () => {

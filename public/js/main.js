@@ -38,8 +38,7 @@ personalCodeVideoButton.addEventListener('click', () => {
   webRTCHandler.sendPreOffer(callType, receiverPersonalCode);
 });
 
-//video call button listeners
-
+//video call button panel
 const micButton = document.getElementById('mic_button');
 micButton.addEventListener('click', () => {
   const localStream = store.getState().localStream;
@@ -63,7 +62,6 @@ screenShareButton.addEventListener('click', () => {
 });
 
 //messenger
-
 const newMessageIput = document.getElementById('new_message_input');
 newMessageIput.addEventListener('keydown', (event) => {
   console.log('Message updated!');
@@ -107,4 +105,15 @@ const resumeRecordingBtn = document.getElementById('resume_recording_button');
 resumeRecordingBtn.addEventListener('click', () => {
   recordingUtils.resumeRecording();
   ui.switchRecordingBtns(false);
+});
+
+//hang up
+const hangupCallBtn = document.getElementById('hang_up_button');
+hangupCallBtn.addEventListener('click', () => {
+  webRTCHandler.handleEndConnection();
+});
+
+const endChatBtn = document.getElementById('finish_chat_call_button');
+endChatBtn.addEventListener('click', () => {
+  webRTCHandler.handleEndConnection();
 });

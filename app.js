@@ -68,6 +68,16 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('user-ended-connection', (data) => {
+    const connectedPeer = connectedPeers.find(
+      (socketID) => socketID === data.connectedUserSocketId
+    );
+
+    if (connectedPeer) {
+      io.to(data.connectedUserSocketId).emit('user-ended-connection');
+    }
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected!');
     const newConnectedPeers = connectedPeers.filter(
