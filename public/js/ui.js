@@ -156,6 +156,22 @@ export const updateScreenShareButton = (screenSharingActive) => {
   screenShareButton.style.color = screenSharingActive ? '#fff' : '#89E0AF';
 };
 
+//ui messages
+export const appendMessage = (message, messageRight = false) => {
+  const messagesContainer = document.getElementById('messages_container');
+  const messageElement = messageRight
+    ? elements.getRightMessage(message)
+    : elements.getLeftMessage(message);
+  messagesContainer.appendChild(messageElement);
+};
+
+export const clearMessenger = () => {
+  const messagesContainer = document.getElementById('messages_container');
+  messagesContainer
+    .querySelectorAll('*')
+    .forEach((message) => message.remove());
+};
+
 //ui helper functions
 
 export const removeAllDialogues = () => {

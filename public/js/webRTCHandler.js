@@ -5,6 +5,7 @@ import * as ui from './ui.js';
 
 let connectedUserDetails;
 let peerConnection;
+let dataChannel;
 
 const defaultContraints = {
   audio: true,
@@ -33,6 +34,19 @@ export const getLocalPreview = async () => {
 
 const createPeerConnection = () => {
   peerConnection = new RTCPeerConnection(configuration);
+
+  dataChannel = peerConnection.createDataChannel('chat');
+  peerConnection.ondatachannel = (event) => {
+    const dataChannel = event.channel;
+    dataChannel.onopen = () =>
+      console.log('peer connetion is ready to receive data channel message!');
+    dataChannel.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      console.log('Message: ', message);
+      ui.appendMessage(message, false);
+    };
+  };
+
   peerConnection.onicecandidate = (event) => {
     console.log('Getting ice candidates from stun server');
     if (event.candidate) {
@@ -69,6 +83,11 @@ const createPeerConnection = () => {
       peerConnection.addTrack(track, localStream);
     }
   }
+};
+
+export const sendMessageUsingDataChannel = (message) => {
+  const stringifiedMessage = JSON.stringify(message);
+  dataChannel.send(stringifiedMessage);
 };
 
 export const sendPreOffer = (callType, receiverPersonalCode) => {
