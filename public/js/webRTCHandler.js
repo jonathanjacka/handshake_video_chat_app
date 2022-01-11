@@ -190,3 +190,48 @@ export const handleWebRTCCandidate = async (data) => {
     console.error('Error with adding ICE candidate: ', error);
   }
 };
+
+let screenSharingStream;
+
+export const toggleScreenShare = async (screenSharingActive) => {
+  if (screenSharingActive) {
+    const localStream = store.getState().localStream;
+    const senders = peerConnection.getSenders();
+    const sender = senders.find(
+      (sender) => sender.track.kind === localStream.getVideoTracks()[0].kind
+    );
+
+    if (sender) {
+      sender.replaceTrack(localStream.getVideoTracks()[0]);
+    }
+    //stop browser from sharing
+    store
+      .getState()
+      .screenSharingStream.getTracks()
+      .forEach((track) => track.stop());
+
+    store.setScreenSharingActive(!screenSharingActive);
+    ui.updateLocalVideo(localStream);
+  } else {
+    console.log('Toggle Screen share');
+    try {
+      screenSharingStream = await navigator.mediaDevices.getDisplayMedia({
+        video: true,
+      });
+      store.setScreenSharingStream(screenSharingStream);
+      const senders = peerConnection.getSenders();
+      const sender = senders.find(
+        (sender) =>
+          sender.track.kind === screenSharingStream.getVideoTracks()[0].kind
+      );
+
+      if (sender) {
+        sender.replaceTrack(screenSharingStream.getVideoTracks()[0]);
+      }
+      store.setScreenSharingActive(!screenSharingActive);
+      ui.updateLocalVideo(screenSharingStream);
+    } catch (error) {
+      console.error('Error sharing screen: ', error);
+    }
+  }
+};

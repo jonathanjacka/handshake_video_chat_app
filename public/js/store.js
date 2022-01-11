@@ -15,10 +15,10 @@ export const setLocalStream = (localStream) =>
 export const setAllowConnectionsFromStrangers = (allowConnection) =>
   (state = { ...state, allowConnectionsFromStrangers: allowConnection });
 
-export const screenSharingActive = (screenSharing) =>
+export const setScreenSharingActive = (screenSharing) =>
   (state = { ...state, screenSharingActive: screenSharing });
 
-export const screenSharingStream = (stream) =>
+export const setScreenSharingStream = (stream) =>
   (state = { ...state, screenSharingStream: stream });
 
 export const setRemoteStream = (remoteStream) =>
