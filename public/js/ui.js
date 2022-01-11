@@ -172,6 +172,36 @@ export const clearMessenger = () => {
     .forEach((message) => message.remove());
 };
 
+//recording
+export const showRecordingPanel = () => {
+  const recordingButtons = document.getElementById('video_recording_buttons');
+  showElement(recordingButtons);
+
+  //hide recording btn if active
+  const startRecordingBtn = document.getElementById('start_recording_button');
+  hideElement(startRecordingBtn);
+};
+
+export const resetRecordingBtns = () => {
+  const recordingButtons = document.getElementById('video_recording_buttons');
+  const startRecordingBtn = document.getElementById('start_recording_button');
+  hideElement(recordingButtons);
+  showElement(startRecordingBtn);
+};
+
+export const switchRecordingBtns = (switcForResumeBtn = false) => {
+  const resumeBtn = document.getElementById('resume_recording_button');
+  const pauseBtn = document.getElementById('pause_recording_button');
+
+  if (switcForResumeBtn) {
+    hideElement(pauseBtn);
+    showElement(resumeBtn);
+  } else {
+    hideElement(resumeBtn);
+    showElement(pauseBtn);
+  }
+};
+
 //ui helper functions
 
 export const removeAllDialogues = () => {
