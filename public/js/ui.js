@@ -156,6 +156,18 @@ export const updateScreenShareButton = (screenSharingActive) => {
   screenShareButton.style.color = screenSharingActive ? '#fff' : '#89E0AF';
 };
 
+export const disableVideoCallButton = () => {
+  const videoBtn = document.getElementById('personal_code_video_button');
+  videoBtn.disabled = true;
+  videoBtn.style.opacity = 0.5;
+};
+
+export const enableVideoCallButton = () => {
+  const videoBtn = document.getElementById('personal_code_video_button');
+  videoBtn.disabled = false;
+  videoBtn.style.opacity = 1;
+};
+
 //ui messages
 export const appendMessage = (message, messageRight = false) => {
   const messagesContainer = document.getElementById('messages_container');

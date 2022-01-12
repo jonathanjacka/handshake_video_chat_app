@@ -24,11 +24,14 @@ export const getLocalPreview = async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia(defaultContraints);
     ui.updateLocalVideo(stream);
+    store.setCallState(constants.callState.CALL_AVAILABLE);
     store.setLocalStream(stream);
+    ui.enableVideoCallButton();
   } catch (error) {
     console.error(
       `An error occured while trying to access camera or video: ${error}`
     );
+    ui.disableVideoCallButton();
   }
 };
 
