@@ -158,14 +158,20 @@ export const updateScreenShareButton = (screenSharingActive) => {
 
 export const disableVideoCallButton = () => {
   const videoBtn = document.getElementById('personal_code_video_button');
+  const strangerVideoBtn = document.getElementById('stranger_video_button');
   videoBtn.disabled = true;
+  strangerVideoBtn.disabled = true;
   videoBtn.style.opacity = 0.5;
+  strangerVideoBtn.style.opacity = 0.5;
 };
 
 export const enableVideoCallButton = () => {
   const videoBtn = document.getElementById('personal_code_video_button');
+  const strangerVideoBtn = document.getElementById('stranger_video_button');
   videoBtn.disabled = false;
+  strangerVideoBtn.disabled = false;
   videoBtn.style.opacity = 1;
+  strangerVideoBtn.style.opacity = 1;
 };
 
 //ui messages
@@ -231,8 +237,8 @@ export const updateUIAfterDisconnect = (callType) => {
   hideElement(messageInput);
 
   clearMessenger();
-  updateMicButton(false);
-  updateCameraButton(false);
+  updateMicButton(true);
+  updateCameraButton(true);
 
   const remoteVideo = document.getElementById('remote_video');
   hideElement(remoteVideo);
