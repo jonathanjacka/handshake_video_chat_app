@@ -1,9 +1,19 @@
 import * as wss from './wss.js';
 
+let strangerCallType;
+
 export const toggleStrangerConnectionStatus = (status) => {
   const data = {
     status,
   };
-  console.log('May chat with strangers: ', status);
   wss.toggleStrangerConnectionStatus(data);
+};
+
+export const getStrangerSocketIdAndConnect = (callType) => {
+  strangerCallType = callType;
+  wss.getStrangerSocketId();
+};
+
+export const connectWithStranger = (data) => {
+  console.log('Stranger ID:', data.randomStrangerSocketId);
 };

@@ -41,11 +41,17 @@ personalCodeVideoButton.addEventListener('click', () => {
 
 //Stranger Chat
 const strangerChatButton = document.getElementById('stranger_chat_button');
-strangerChatButton.addEventListener('click', () => {});
+strangerChatButton.addEventListener('click', () => {
+  strangerUtils.getStrangerSocketIdAndConnect(constants.callType.CHAT_STRANGER);
+});
 
 //Stranger Video
 const strangerVideoButton = document.getElementById('stranger_video_button');
-strangerVideoButton.addEventListener('click', () => {});
+strangerVideoButton.addEventListener('click', () => {
+  strangerUtils.getStrangerSocketIdAndConnect(
+    constants.callType.VIDEO_STRANGER
+  );
+});
 
 //register events to allow connection from strangers
 const checkbox = document.getElementById('allow_strangers_checkbox_input');
