@@ -58,3 +58,7 @@ export const sendDataUsingWebRTCSignaling = (data) => {
 export const sendUserEndConnection = (data) => {
   socketIO.emit('user-ended-connection', data);
 };
+
+export const toggleStrangerConnectionStatus = (data) => {
+  socketIO.emit('toggle-stranger-connection-status', data);
+};

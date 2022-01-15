@@ -22,11 +22,13 @@ app.get('/', (req, res) => res.sendFile(__dirname + '/public/index.html'));
 //Socket IO
 const io = new Server(server);
 let connectedPeers = [];
+let connectedPeersStrangers = [];
 
 io.on('connection', (socket) => {
   console.log('a user connected to socket.io server: ', socket.id);
   connectedPeers = [...connectedPeers, socket.id];
-  console.log(connectedPeers);
+  console.log('Connected Peers: ', connectedPeers);
+  console.log('Connected Peers STRANGERS: ', connectedPeersStrangers);
 
   socket.on('pre-offer', (data) => {
     const { receiverPersonalCode, callType } = data;
@@ -78,13 +80,25 @@ io.on('connection', (socket) => {
     }
   });
 
+  socket.on('toggle-stranger-connection-status', (data) => {
+    const { status } = data;
+
+    if (!status) {
+      connectedPeersStrangers = connectedPeersStrangers.filter(
+        (id) => id !== socket.id
+      );
+    } else {
+      connectedPeersStrangers = [...connectedPeersStrangers, socket.id];
+    }
+    console.log('Connected Peers Strangers: ', connectedPeersStrangers);
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected!');
-    const newConnectedPeers = connectedPeers.filter(
-      (peerId) => peerId !== socket.id
+    connectedPeers = connectedPeers.filter((peerId) => peerId !== socket.id);
+    connectedPeersStrangers = connectedPeersStrangers.filter(
+      (id) => id !== socket.id
     );
-    connectedPeers = [...newConnectedPeers];
-    console.log(connectedPeers);
   });
 });
 

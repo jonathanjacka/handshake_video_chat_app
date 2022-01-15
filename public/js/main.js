@@ -4,6 +4,7 @@ import * as wss from './wss.js';
 import * as webRTCHandler from './webRTCHandler.js';
 import * as constants from './constants.js';
 import * as recordingUtils from './recordingUtils.js';
+import * as strangerUtils from './strangerUtils.js';
 
 //initialize socket.io connection
 wss.registerSocketEvents(socket);
@@ -14,13 +15,10 @@ webRTCHandler.getLocalPreview();
 ui.copyPersonalCode(store);
 
 //register event listeners for connection buttons
+//Personal Chat
 const personalCodeChatButton = document.getElementById(
   'personal_code_chat_button'
 );
-const personalCodeVideoButton = document.getElementById(
-  'personal_code_video_button'
-);
-//Personal Chat
 personalCodeChatButton.addEventListener('click', () => {
   const receiverPersonalCode = document.getElementById(
     'personal_code_input'
@@ -30,12 +28,31 @@ personalCodeChatButton.addEventListener('click', () => {
 });
 
 //Personal Video
+const personalCodeVideoButton = document.getElementById(
+  'personal_code_video_button'
+);
 personalCodeVideoButton.addEventListener('click', () => {
   const receiverPersonalCode = document.getElementById(
     'personal_code_input'
   ).value;
   const callType = constants.callType.VIDEO_PERSONAL_CODE;
   webRTCHandler.sendPreOffer(callType, receiverPersonalCode);
+});
+
+//Stranger Chat
+const strangerChatButton = document.getElementById('stranger_chat_button');
+strangerChatButton.addEventListener('click', () => {});
+
+//Stranger Video
+const strangerVideoButton = document.getElementById('stranger_video_button');
+strangerVideoButton.addEventListener('click', () => {});
+
+//register events to allow connection from strangers
+const checkbox = document.getElementById('allow_strangers_checkbox_input');
+checkbox.addEventListener('click', () => {
+  store.setAllowConnectionsFromStrangers(checkbox.checked);
+  const checkboxState = store.getState().allowConnectionsFromStrangers;
+  strangerUtils.toggleStrangerConnectionStatus(checkboxState);
 });
 
 //video call button panel
