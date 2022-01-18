@@ -46,7 +46,10 @@ export const showIncomingCallDialogue = (
   rejectCallHandler
 ) => {
   const callTypeInfo =
-    callType === constants.callType.CHAT_PERSONAL_CODE ? 'Chat' : 'Video';
+    callType === constants.callType.CHAT_PERSONAL_CODE ||
+    callType === constants.callType.CHAT_STRANGER
+      ? 'Chat'
+      : 'Video';
 
   const incomingCallDialogue = elements.getIncomingCallDialogue(
     callTypeInfo,
@@ -60,7 +63,10 @@ export const showIncomingCallDialogue = (
 
 export const showCallingDialogue = (callType, callingDialogueRejectHandler) => {
   const callTypeInfo =
-    callType === constants.callType.CHAT_PERSONAL_CODE ? 'Chat' : 'Video';
+    callType === constants.callType.CHAT_PERSONAL_CODE ||
+    callType === constants.callType.CHAT_STRANGER
+      ? 'Chat'
+      : 'Video';
 
   const connectingDialogue = elements.getOutgoingConnectionDialogue(
     callTypeInfo,
@@ -69,6 +75,14 @@ export const showCallingDialogue = (callType, callingDialogueRejectHandler) => {
 
   removeAllDialogues();
   dialogue.appendChild(connectingDialogue);
+};
+
+export const noStrangerAvailableDialogue = () => {
+  const infoDialogue = elements.getInfoDialogue(
+    'Connection rejected',
+    'There are no strangers available to connect with you!'
+  );
+  dialogue.appendChild(infoDialogue);
 };
 
 export const showInfoDialogue = (preOfferAnswer) => {
@@ -99,9 +113,15 @@ export const showInfoDialogue = (preOfferAnswer) => {
 };
 
 export const showCallElements = (callType) => {
-  if (callType === constants.callType.CHAT_PERSONAL_CODE) {
+  if (
+    callType === constants.callType.CHAT_PERSONAL_CODE ||
+    callType === constants.callType.CHAT_STRANGER
+  ) {
     showChatCallElements();
-  } else if (callType === constants.callType.VIDEO_PERSONAL_CODE) {
+  } else if (
+    callType === constants.callType.VIDEO_PERSONAL_CODE ||
+    callType === constants.callType.VIDEO_STRANGER
+  ) {
     showVideoCallElements();
   }
 };

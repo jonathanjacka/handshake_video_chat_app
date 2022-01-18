@@ -1,4 +1,6 @@
 import * as wss from './wss.js';
+import * as webRTCHandler from './webRTCHandler.js';
+import * as ui from './ui.js';
 
 let strangerCallType;
 
@@ -15,5 +17,11 @@ export const getStrangerSocketIdAndConnect = (callType) => {
 };
 
 export const connectWithStranger = (data) => {
-  console.log('Stranger ID:', data.randomStrangerSocketId);
+  if (data.randomStrangerSocketId) {
+    webRTCHandler.sendPreOffer(strangerCallType, data.randomStrangerSocketId);
+    console.log('Connecting with stranger: ', data.randomStrangerSocketId);
+  } else {
+    console.log('No stranger is available for connection!');
+    ui.noStrangerAvailableDialogue();
+  }
 };

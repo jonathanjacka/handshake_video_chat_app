@@ -79,7 +79,8 @@ const createPeerConnection = () => {
 
   //add our tracks to stream
   if (
-    connectedUserDetails.callType === constants.callType.VIDEO_PERSONAL_CODE
+    connectedUserDetails.callType === constants.callType.VIDEO_PERSONAL_CODE ||
+    connectedUserDetails.callType === constants.callType.VIDEO_STRANGER
   ) {
     const localStream = store.getState().localStream;
     for (const track of localStream.getTracks()) {
@@ -112,6 +113,17 @@ export const sendPreOffer = (callType, receiverPersonalCode) => {
     ui.showCallingDialogue(callType, callingDialogueRejectHandler);
     store.setCallState(constants.callState.CALL_UNAVAILABLE);
     wss.sendPreOffer(data);
+  } else if (
+    callType === constants.callType.CHAT_STRANGER ||
+    callType === constants.callType.VIDEO_STRANGER
+  ) {
+    const data = {
+      callType,
+      receiverPersonalCode,
+    };
+    ui.showCallingDialogue(callType, callingDialogueRejectHandler);
+    store.setCallState(constants.callState.CALL_UNAVAILABLE);
+    wss.sendPreOffer(data);
   } else {
     console.error('error in webRTCHandler.sendPreOffer');
   }
@@ -137,6 +149,11 @@ export const handlePreOffer = (data) => {
   if (
     callType === constants.callType.CHAT_PERSONAL_CODE ||
     callType === constants.callType.VIDEO_PERSONAL_CODE
+  ) {
+    ui.showIncomingCallDialogue(callType, acceptCallHandler, rejectCallHandler);
+  } else if (
+    callType === constants.callType.CHAT_STRANGER ||
+    callType === constants.callType.VIDEO_STRANGER
   ) {
     ui.showIncomingCallDialogue(callType, acceptCallHandler, rejectCallHandler);
   }
