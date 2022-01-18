@@ -14,6 +14,9 @@ webRTCHandler.getLocalPreview();
 //Event for personal code copy button
 ui.copyPersonalCode(store);
 
+//uncheck checkbox by default for start
+ui.uncheckStrangerConnectForStart();
+
 //register event listeners for connection buttons
 //Personal Chat
 const personalCodeChatButton = document.getElementById(
@@ -59,6 +62,7 @@ checkbox.addEventListener('click', () => {
   store.setAllowConnectionsFromStrangers(checkbox.checked);
   const checkboxState = store.getState().allowConnectionsFromStrangers;
   strangerUtils.toggleStrangerConnectionStatus(checkboxState);
+  ui.toggleStrangerConnectionBtns(checkboxState);
 });
 
 //video call button panel

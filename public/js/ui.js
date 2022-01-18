@@ -1,5 +1,6 @@
 import * as constants from './constants.js';
 import * as elements from './elements.js';
+import * as store from './store.js';
 
 export const updatePersonalCode = (personalCode) => {
   const personalCodeParagraph = document.getElementById(
@@ -26,6 +27,12 @@ export const copyPersonalCode = (store) => {
       personalCodeCopyButton.style.background = '#757ae2';
     }, 1500);
   });
+};
+
+export const uncheckStrangerConnectForStart = () => {
+  const checkbox = document.getElementById('allow_strangers_checkbox_input');
+  checkbox.checked = false;
+  toggleStrangerConnectionBtns(false);
 };
 
 export const updateLocalVideo = (stream) => {
@@ -192,6 +199,16 @@ export const enableVideoCallButton = () => {
   strangerVideoBtn.disabled = false;
   videoBtn.style.opacity = 1;
   strangerVideoBtn.style.opacity = 1;
+};
+
+export const toggleStrangerConnectionBtns = (checkboxState) => {
+  const strangerVideoBtn = document.getElementById('stranger_video_button');
+  const strangerChatBtn = document.getElementById('stranger_chat_button');
+
+  strangerChatBtn.disabled = !checkboxState;
+  strangerVideoBtn.disabled = !checkboxState;
+  strangerChatBtn.style.opacity = !checkboxState ? 0.5 : 1;
+  strangerVideoBtn.style.opacity = !checkboxState ? 0.5 : 1;
 };
 
 //ui messages
