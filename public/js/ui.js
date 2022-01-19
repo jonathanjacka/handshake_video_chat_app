@@ -1,6 +1,5 @@
 import * as constants from './constants.js';
 import * as elements from './elements.js';
-import * as store from './store.js';
 
 export const updatePersonalCode = (personalCode) => {
   const personalCodeParagraph = document.getElementById(
@@ -105,15 +104,15 @@ export const showInfoDialogue = (preOfferAnswer) => {
       'Connection rejected',
       'Receiver rejected your connection'
     );
-  } else if (preOfferAnswer === constants.preOfferAnswer.CALL_UNAVAILABLE) {
+  } else if (preOfferAnswer === constants.preOfferAnswer.RECEIVER_NO_VIDEO) {
     infoDialogue = elements.getInfoDialogue(
       'Connection rejected',
-      'Receiver is unavailable or busy'
+      "There was an error with the receiver's video - try to chat instead"
     );
   } else {
     infoDialogue = elements.getInfoDialogue(
       'Connection rejected',
-      'There was an error in attempting to connect'
+      'Receiver is unavailable or busy'
     );
   }
   dialogue.appendChild(infoDialogue);
@@ -148,6 +147,9 @@ const showChatCallElements = () => {
 const showVideoCallElements = () => {
   const callButtons = document.getElementById('call_buttons');
   showElement(callButtons);
+
+  const localVideo = document.getElementById('local_video');
+  showElement(localVideo);
 
   const videoPlaceholder = document.getElementById('video_placeholder');
   hideElement(videoPlaceholder);
@@ -207,6 +209,8 @@ export const toggleStrangerConnectionBtns = (checkboxState) => {
 
   strangerChatBtn.disabled = !checkboxState;
   strangerVideoBtn.disabled = !checkboxState;
+  strangerChatBtn.style.cursor = !checkboxState ? 'not-allowed' : 'pointer';
+  strangerVideoBtn.style.cursor = !checkboxState ? 'not-allowed' : 'pointer';
   strangerChatBtn.style.opacity = !checkboxState ? 0.5 : 1;
   strangerVideoBtn.style.opacity = !checkboxState ? 0.5 : 1;
 };
@@ -276,6 +280,9 @@ export const updateUIAfterDisconnect = (callType) => {
   clearMessenger();
   updateMicButton(true);
   updateCameraButton(true);
+
+  const localVideo = document.getElementById('local_video');
+  hideElement(localVideo);
 
   const remoteVideo = document.getElementById('remote_video');
   hideElement(remoteVideo);

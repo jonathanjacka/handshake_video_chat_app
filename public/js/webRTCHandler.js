@@ -26,12 +26,13 @@ export const getLocalPreview = async () => {
     ui.updateLocalVideo(stream);
     store.setCallState(constants.callState.CALL_AVAILABLE);
     store.setLocalStream(stream);
-    //ui.enableVideoCallButton();
+
+    store.setCameraAvailable(true);
   } catch (error) {
     console.error(
       `An error occured while trying to access camera or video: ${error}`
     );
-    ui.disableVideoCallButton();
+    store.setCameraAvailable(false);
   }
 };
 
@@ -100,20 +101,9 @@ export const sendPreOffer = (callType, receiverPersonalCode) => {
     socketId: receiverPersonalCode,
   };
 
-  console.log(connectedUserDetails);
   if (
     callType === constants.callType.CHAT_PERSONAL_CODE ||
-    callType === constants.callType.VIDEO_PERSONAL_CODE
-  ) {
-    const data = {
-      callType,
-      receiverPersonalCode,
-    };
-
-    ui.showCallingDialogue(callType, callingDialogueRejectHandler);
-    store.setCallState(constants.callState.CALL_UNAVAILABLE);
-    wss.sendPreOffer(data);
-  } else if (
+    callType === constants.callType.VIDEO_PERSONAL_CODE ||
     callType === constants.callType.CHAT_STRANGER ||
     callType === constants.callType.VIDEO_STRANGER
   ) {
@@ -121,6 +111,7 @@ export const sendPreOffer = (callType, receiverPersonalCode) => {
       callType,
       receiverPersonalCode,
     };
+
     ui.showCallingDialogue(callType, callingDialogueRejectHandler);
     store.setCallState(constants.callState.CALL_UNAVAILABLE);
     wss.sendPreOffer(data);
@@ -129,10 +120,22 @@ export const sendPreOffer = (callType, receiverPersonalCode) => {
   }
 };
 
-export const handlePreOffer = (data) => {
+export const handlePreOffer = async (data) => {
   const { callType, callerSocketId } = data;
 
+  if (
+    !store.getState().cameraAvailable &&
+    (callType === constants.callType.VIDEO_PERSONAL_CODE ||
+      callType === constants.callType.VIDEO_STRANGER)
+  ) {
+    return sendPreOfferAnswer(
+      constants.preOfferAnswer.RECEIVER_NO_VIDEO,
+      callerSocketId
+    );
+  }
+
   if (!checkCallPossibility()) {
+    console.log('Hit!', callType);
     return sendPreOfferAnswer(
       constants.preOfferAnswer.CALL_UNAVAILABLE,
       callerSocketId
@@ -182,6 +185,7 @@ const callingDialogueRejectHandler = () => {
 };
 
 const sendPreOfferAnswer = (preOfferAnswer, callerSocketId = null) => {
+  console.log(preOfferAnswer);
   const data = {
     callerSocketId: callerSocketId
       ? callerSocketId

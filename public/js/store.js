@@ -8,6 +8,7 @@ let state = {
   screenSharingActive: false,
   allowConnectionsFromStrangers: false,
   callState: constants.callState.CALL_AVAILABLE_CHAT_ONLY,
+  cameraAvailable: null,
 };
 
 export const setSocketId = (socketId) => (state = { ...state, socketId });
@@ -28,5 +29,8 @@ export const setRemoteStream = (remoteStream) =>
   (state = { ...state, remoteStream });
 
 export const setCallState = (callState) => (state = { ...state, callState });
+
+export const setCameraAvailable = (cameraAvailable) =>
+  (state = { ...state, cameraAvailable });
 
 export const getState = () => state;

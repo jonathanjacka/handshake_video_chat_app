@@ -5,10 +5,12 @@ import * as webRTCHandler from './webRTCHandler.js';
 import * as constants from './constants.js';
 import * as recordingUtils from './recordingUtils.js';
 import * as strangerUtils from './strangerUtils.js';
+import * as elements from './elements.js';
 
 //initialize socket.io connection
 wss.registerSocketEvents(socket);
 
+//check camera availablity
 webRTCHandler.getLocalPreview();
 
 //Event for personal code copy button
@@ -34,12 +36,22 @@ personalCodeChatButton.addEventListener('click', () => {
 const personalCodeVideoButton = document.getElementById(
   'personal_code_video_button'
 );
-personalCodeVideoButton.addEventListener('click', () => {
+personalCodeVideoButton.addEventListener('click', async () => {
   const receiverPersonalCode = document.getElementById(
     'personal_code_input'
   ).value;
   const callType = constants.callType.VIDEO_PERSONAL_CODE;
-  webRTCHandler.sendPreOffer(callType, receiverPersonalCode);
+
+  //attempting to connect
+  if (store.getState().cameraAvailable) {
+    webRTCHandler.sendPreOffer(callType, receiverPersonalCode);
+  } else {
+    const infoDialogue = elements.getInfoDialogue(
+      'Connection rejected',
+      'Error with camera - check your browser permissions to allow use of camera'
+    );
+    dialogue.appendChild(infoDialogue);
+  }
 });
 
 //Stranger Chat

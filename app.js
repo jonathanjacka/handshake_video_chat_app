@@ -57,6 +57,7 @@ io.on('connection', (socket) => {
 
     if (connectedPeer) {
       io.to(data.callerSocketId).emit('pre-offer-answer', data);
+      console.log(data);
     }
   });
 
@@ -121,6 +122,7 @@ io.on('connection', (socket) => {
     connectedPeersStrangers = connectedPeersStrangers.filter(
       (id) => id !== socket.id
     );
+    //TODO: Broadcast disconnect
   });
 });
 
