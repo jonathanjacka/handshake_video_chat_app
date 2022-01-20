@@ -134,7 +134,7 @@ export const handlePreOffer = async (data) => {
     );
   }
 
-  if (!checkCallPossibility()) {
+  if (!checkCallPossibility(callType)) {
     console.log('Hit!', callType);
     return sendPreOfferAnswer(
       constants.preOfferAnswer.CALL_UNAVAILABLE,
@@ -185,7 +185,7 @@ const callingDialogueRejectHandler = () => {
 };
 
 const sendPreOfferAnswer = (preOfferAnswer, callerSocketId = null) => {
-  console.log(preOfferAnswer);
+  console.log('pre offer answer:', preOfferAnswer);
   const data = {
     callerSocketId: callerSocketId
       ? callerSocketId
@@ -331,7 +331,19 @@ const closePeerConnection = () => {
 
 const checkCallPossibility = (callType) => {
   const callState = store.getState().callState;
+
+  console.log('Checking callPossibility CallType: ', callType);
+  console.log('Checking callPossibility CallState: ', callState);
+
   if (callState === constants.callState.CALL_AVAILABLE) {
+    return true;
+  }
+
+  if (
+    (callType === constants.callType.CHAT_PERSONAL_CODE ||
+      callType === constants.callType.CHAT_STRANGER) &&
+    callState === constants.callState.CALL_AVAILABLE_CHAT_ONLY
+  ) {
     return true;
   }
 
