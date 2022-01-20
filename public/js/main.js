@@ -63,9 +63,18 @@ strangerChatButton.addEventListener('click', () => {
 //Stranger Video
 const strangerVideoButton = document.getElementById('stranger_video_button');
 strangerVideoButton.addEventListener('click', () => {
-  strangerUtils.getStrangerSocketIdAndConnect(
-    constants.callType.VIDEO_STRANGER
-  );
+  //attempting to connect
+  if (store.getState().cameraAvailable) {
+    strangerUtils.getStrangerSocketIdAndConnect(
+      constants.callType.VIDEO_STRANGER
+    );
+  } else {
+    const infoDialogue = elements.getInfoDialogue(
+      'Connection rejected',
+      'Error with camera - check your browser permissions to allow use of camera'
+    );
+    dialogue.appendChild(infoDialogue);
+  }
 });
 
 //register events to allow connection from strangers
