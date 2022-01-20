@@ -10,8 +10,10 @@ import * as elements from './elements.js';
 //initialize socket.io connection
 wss.registerSocketEvents(socket);
 
-//check camera availablity
+//check and set camera availablity
 webRTCHandler.getLocalPreview();
+const localVideo = document.getElementById('local_video');
+ui.hideElement(localVideo);
 
 //Event for personal code copy button
 ui.copyPersonalCode(store);

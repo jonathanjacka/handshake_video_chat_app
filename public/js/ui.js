@@ -314,7 +314,7 @@ const disableDashboard = () => {
     dashboardBlocker.classList.remove('display_none');
 };
 
-const hideElement = (element) => {
+export const hideElement = (element) => {
   !element.classList.contains('display_none') &&
     element.classList.add('display_none');
 };
