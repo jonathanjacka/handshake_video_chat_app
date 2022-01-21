@@ -65,6 +65,7 @@ export const showIncomingCallDialogue = (
 
   removeAllDialogues();
   dialogue.appendChild(incomingCallDialogue);
+  //play incoming sound
 };
 
 export const showCallingDialogue = (callType, callingDialogueRejectHandler) => {
@@ -81,6 +82,7 @@ export const showCallingDialogue = (callType, callingDialogueRejectHandler) => {
 
   removeAllDialogues();
   dialogue.appendChild(connectingDialogue);
+  //play incoming sound
 };
 
 export const noStrangerAvailableDialogue = () => {
@@ -115,6 +117,7 @@ export const showInfoDialogue = (preOfferAnswer) => {
       'Receiver is unavailable or busy'
     );
   }
+
   dialogue.appendChild(infoDialogue);
 };
 
@@ -293,6 +296,9 @@ export const updateUIAfterDisconnect = (callType) => {
   removeAllDialogues();
 
   enableDashboard();
+
+  //play hang up sound
+  playDisconnectSound();
 };
 
 //ui helper functions
@@ -322,4 +328,22 @@ export const hideElement = (element) => {
 const showElement = (element) => {
   element.classList.contains('display_none') &&
     element.classList.remove('display_none');
+};
+
+//sounds
+const playConnectSound = () => {
+  const connectSound = document.getElementById('audio-disconnect');
+  connectSound.play();
+};
+
+const playDisconnectSound = () => {
+  stopAllSounds();
+  const disconnectSound = document.getElementById('audio-disconnect');
+  disconnectSound.play();
+  //setTimeout(stopAllSounds, disconnectSound.duration);
+};
+
+const stopAllSounds = () => {
+  const sounds = document.querySelectorAll('audio');
+  sounds.forEach((sound) => sound.pause());
 };

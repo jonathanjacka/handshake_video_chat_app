@@ -122,6 +122,7 @@ export const getInfoDialogue = (title, description) => {
 
   dialogue.appendChild(dialogueContent);
 
+  //play sound
   return dialogue;
 };
 
