@@ -65,7 +65,6 @@ export const showIncomingCallDialogue = (
 
   removeAllDialogues();
   dialogue.appendChild(incomingCallDialogue);
-  //play incoming sound
 };
 
 export const showCallingDialogue = (callType, callingDialogueRejectHandler) => {
@@ -82,7 +81,6 @@ export const showCallingDialogue = (callType, callingDialogueRejectHandler) => {
 
   removeAllDialogues();
   dialogue.appendChild(connectingDialogue);
-  //play incoming sound
 };
 
 export const noStrangerAvailableDialogue = () => {
@@ -225,6 +223,7 @@ export const appendMessage = (message, messageRight = false) => {
     ? elements.getRightMessage(message)
     : elements.getLeftMessage(message);
   messagesContainer.appendChild(messageElement);
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
 };
 
 export const clearMessenger = () => {
@@ -297,7 +296,6 @@ export const updateUIAfterDisconnect = (callType) => {
 
   enableDashboard();
 
-  //play hang up sound
   playDisconnectSound();
 };
 
@@ -331,16 +329,15 @@ const showElement = (element) => {
 };
 
 //sounds
-const playConnectSound = () => {
+function playConnectSound() {
   const connectSound = document.getElementById('audio-disconnect');
   connectSound.play();
-};
+}
 
 const playDisconnectSound = () => {
   stopAllSounds();
   const disconnectSound = document.getElementById('audio-disconnect');
   disconnectSound.play();
-  //setTimeout(stopAllSounds, disconnectSound.duration);
 };
 
 const stopAllSounds = () => {

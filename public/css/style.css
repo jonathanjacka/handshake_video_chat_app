@@ -88,6 +88,27 @@ body {
   display: flex;
   flex-direction: column;
 }
+/* Scroll bar for messager container */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(254, 246, 255);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(223, 210, 255, 1);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(209, 193, 248);
+}
 
 .logo_container {
   width: 100%;
@@ -331,32 +352,42 @@ body {
 
 .message_left_container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: flex-start;
 }
 
 .message_left_paragraph {
   background: #ffffff;
   border: 1px solid #d5deeb;
-  border-radius: 8px 8px 8px 0px;
+  border-radius: 50px 50px 50px 0px;
   padding: 20px 13px;
   color: #545c68;
   min-width: 60px;
+  max-width: 80%;
+  overflow-wrap: break-word;
 }
 
 .message_right_container {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: flex-end;
 }
 
 .message_right_paragraph {
-  background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
+  background: #9687fb;
+  background: radial-gradient(
+    circle,
+    rgba(122, 130, 243, 1) 2%,
+    rgba(163, 138, 255, 1) 98%
+  );
   border: 1px solid #d5deeb;
-  border-radius: 8px 8px 8px 0px;
+  border-radius: 50px 50px 0px 50px;
   padding: 20px 13px;
+  margin-right: 10px;
   color: #ffffff;
   min-width: 60px;
+  max-width: 80%;
+  overflow-wrap: break-word;
 }
 
 .videos_container {
