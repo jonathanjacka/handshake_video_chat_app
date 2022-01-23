@@ -366,3 +366,9 @@ const setIncomingCallAvailable = () => {
     store.setCallState(constants.callState.CALL_AVAILABLE_CHAT_ONLY);
   }
 };
+
+//recording message
+export const sendRecordingMessage = () => {
+  const data = { connectedUserDetails };
+  wss.sendRecordingMessage(data);
+};

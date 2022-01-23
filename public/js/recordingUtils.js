@@ -1,4 +1,5 @@
 import * as store from './store.js';
+import * as webRTCHandler from './webRTCHandler.js';
 
 let mediaRecorder;
 
@@ -14,6 +15,8 @@ export const startRecording = () => {
   } else {
     mediaRecorder = new MediaRecorder(remoteStream);
   }
+
+  webRTCHandler.sendRecordingMessage();
 
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start();

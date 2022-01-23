@@ -401,6 +401,7 @@ body {
     rgba(122, 130, 243, 1) 2%,
     rgba(163, 138, 255, 1) 98%
   );
+  position: relative;
 }
 
 .videos_placeholder {
@@ -479,6 +480,15 @@ body {
 
 #start_recording_button {
   border: 2px solid #fc5d5b;
+}
+
+.recording_message {
+  background: #ee5d94;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 .dialogue_wrapper {

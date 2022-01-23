@@ -116,6 +116,16 @@ io.on('connection', (socket) => {
     io.to(socket.id).emit('stranger-socket-id', data);
   });
 
+  socket.on('user-recording', (data) => {
+    console.log('USER IS RECORDING!', data);
+
+    const {
+      connectedUserDetails: { socketId },
+    } = data;
+
+    io.to(socketId).emit('user-recording', socketId);
+  });
+
   socket.on('disconnect', () => {
     console.log('user disconnected!');
     connectedPeers = connectedPeers.filter((peerId) => peerId !== socket.id);

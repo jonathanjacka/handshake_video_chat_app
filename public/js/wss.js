@@ -46,6 +46,10 @@ export const registerSocketEvents = (socket) => {
   socket.on('stranger-socket-id', (data) => {
     strangerUtils.connectWithStranger(data);
   });
+
+  socket.on('user-recording', (socketId) => {
+    console.log('user toggled recording!');
+  });
 };
 
 export const sendPreOffer = (data) => {
@@ -70,4 +74,8 @@ export const toggleStrangerConnectionStatus = (data) => {
 
 export const getStrangerSocketId = () => {
   socketIO.emit('get-stranger-socket-id');
+};
+
+export const sendRecordingMessage = (data) => {
+  socketIO.emit('user-recording', data);
 };
