@@ -16,7 +16,7 @@ export const startRecording = () => {
     mediaRecorder = new MediaRecorder(remoteStream);
   }
 
-  webRTCHandler.sendRecordingMessage();
+  webRTCHandler.sendRecordingMessage(true);
 
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start();
@@ -24,7 +24,17 @@ export const startRecording = () => {
 
 export const pauseRecording = () => mediaRecorder.pause();
 export const resumeRecording = () => mediaRecorder.resume();
-export const stopRecording = () => mediaRecorder.stop();
+export const stopRecording = () => {
+  mediaRecorder.stop();
+  webRTCHandler.sendRecordingMessage(false);
+};
+
+export const togglePeerRecordingMessage = (isRecording) => {
+  const recordingMsg = document.getElementById('peer_recording_message');
+  isRecording
+    ? recordingMsg.classList.remove('display_none')
+    : recordingMsg.classList.add('display_none');
+};
 
 const downloadRecordedVideo = () => {
   const blob = new Blob(recordedChucks, { type: 'video/webm' });

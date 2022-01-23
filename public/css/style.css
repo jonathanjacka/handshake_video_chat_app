@@ -483,12 +483,21 @@ body {
 }
 
 .recording_message {
-  background: #ee5d94;
   position: absolute;
-  right: 10px;
-  bottom: 10px;
   padding: 5px;
   border-radius: 10px;
+}
+
+#peer_recording_message {
+  background: #ee5d94;
+  right: 10px;
+  bottom: 10px;
+}
+#user_recording_message {
+  background: #89dab2;
+  color: #8b86f8;
+  left: 10px;
+  bottom: 10px;
 }
 
 .dialogue_wrapper {

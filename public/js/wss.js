@@ -3,6 +3,7 @@ import * as ui from './ui.js';
 import * as webRTCHandler from './webRTCHandler.js';
 import * as constants from './constants.js';
 import * as strangerUtils from './strangerUtils.js';
+import * as recordingUtils from './recordingUtils.js';
 
 let socketIO = null;
 
@@ -47,8 +48,9 @@ export const registerSocketEvents = (socket) => {
     strangerUtils.connectWithStranger(data);
   });
 
-  socket.on('user-recording', (socketId) => {
-    console.log('user toggled recording!');
+  socket.on('user-recording', (isRecording) => {
+    console.log('user toggled recording!', isRecording);
+    recordingUtils.togglePeerRecordingMessage(isRecording);
   });
 };
 

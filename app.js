@@ -117,13 +117,16 @@ io.on('connection', (socket) => {
   });
 
   socket.on('user-recording', (data) => {
-    console.log('USER IS RECORDING!', data);
+    console.log('USER RECORDING:', data);
 
     const {
       connectedUserDetails: { socketId },
+      isRecording,
     } = data;
 
-    io.to(socketId).emit('user-recording', socketId);
+    console.log(isRecording);
+
+    io.to(socketId).emit('user-recording', isRecording);
   });
 
   socket.on('disconnect', () => {

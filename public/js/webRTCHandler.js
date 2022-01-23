@@ -368,7 +368,7 @@ const setIncomingCallAvailable = () => {
 };
 
 //recording message
-export const sendRecordingMessage = () => {
-  const data = { connectedUserDetails };
+export const sendRecordingMessage = (isRecording) => {
+  const data = { connectedUserDetails, isRecording };
   wss.sendRecordingMessage(data);
 };
