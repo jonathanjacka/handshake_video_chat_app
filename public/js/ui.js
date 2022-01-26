@@ -1,5 +1,6 @@
 import * as constants from './constants.js';
 import * as elements from './elements.js';
+import * as recordingUtils from './recordingUtils.js';
 
 export const updatePersonalCode = (personalCode) => {
   const personalCodeParagraph = document.getElementById(
@@ -287,6 +288,8 @@ export const updateUIAfterDisconnect = (callType) => {
   clearMessenger();
   updateMicButton(true);
   updateCameraButton(true);
+  //recordingUtils.stopRecording();
+  resetRecordingBtns();
 
   const localVideo = document.getElementById('local_video');
   hideElement(localVideo);

@@ -57,7 +57,6 @@ io.on('connection', (socket) => {
 
     if (connectedPeer) {
       io.to(data.callerSocketId).emit('pre-offer-answer', data);
-      console.log(data);
     }
   });
 
@@ -117,20 +116,14 @@ io.on('connection', (socket) => {
   });
 
   socket.on('user-recording', (data) => {
-    console.log('USER RECORDING:', data);
-
     const {
       connectedUserDetails: { socketId },
       isRecording,
     } = data;
-
-    console.log(isRecording);
-
     io.to(socketId).emit('user-recording', isRecording);
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected!');
     connectedPeers = connectedPeers.filter((peerId) => peerId !== socket.id);
     connectedPeersStrangers = connectedPeersStrangers.filter(
       (id) => id !== socket.id

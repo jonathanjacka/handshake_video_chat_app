@@ -3,8 +3,6 @@ export const getIncomingCallDialogue = (
   acceptCallHandler,
   rejectCallHandler
 ) => {
-  console.log('Getting incoming call dialogue');
-
   const dialogue = document.createElement('div');
   dialogue.classList.add('dialogue_wrapper');
 
@@ -55,8 +53,6 @@ export const getOutgoingConnectionDialogue = (
   callTypeInfo,
   callingDialogueRejectHandler
 ) => {
-  console.log('Pushing outgoing connection dialogue:');
-
   const dialogue = document.createElement('div');
   dialogue.classList.add('dialogue_wrapper');
 

@@ -114,7 +114,6 @@ screenShareButton.addEventListener('click', () => {
 //messenger
 const newMessageIput = document.getElementById('new_message_input');
 newMessageIput.addEventListener('keydown', (event) => {
-  console.log('Message updated!');
   const key = event.code;
 
   if (key === 'Enter') {

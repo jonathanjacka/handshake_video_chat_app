@@ -11,7 +11,6 @@ export const registerSocketEvents = (socket) => {
   socketIO = socket;
 
   socket.on('connect', () => {
-    console.log('Successfully connected to the socket.io server');
     store.setSocketId(socket.id);
     ui.updatePersonalCode(socket.id);
   });
@@ -49,7 +48,6 @@ export const registerSocketEvents = (socket) => {
   });
 
   socket.on('user-recording', (isRecording) => {
-    console.log('user toggled recording!', isRecording);
     recordingUtils.togglePeerRecordingMessage(isRecording);
   });
 };

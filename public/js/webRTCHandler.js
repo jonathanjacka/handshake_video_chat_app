@@ -43,16 +43,13 @@ const createPeerConnection = () => {
   peerConnection.ondatachannel = (event) => {
     const dataChannel = event.channel;
     dataChannel.onopen = () =>
-      console.log('peer connetion is ready to receive data channel message!');
-    dataChannel.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      console.log('Message: ', message);
-      ui.appendMessage(message, false);
-    };
+      (dataChannel.onmessage = (event) => {
+        const message = JSON.parse(event.data);
+        ui.appendMessage(message, false);
+      });
   };
 
   peerConnection.onicecandidate = (event) => {
-    console.log('Getting ice candidates from stun server');
     if (event.candidate) {
       //send our ice candidates to peer
       wss.sendDataUsingWebRTCSignaling({
@@ -65,7 +62,6 @@ const createPeerConnection = () => {
 
   peerConnection.onconnectionstatechange = (event) => {
     if (peerConnection.connectionState === 'connected') {
-      console.log('Successfully connected to peer');
     }
   };
 
@@ -135,7 +131,6 @@ export const handlePreOffer = async (data) => {
   }
 
   if (!checkCallPossibility(callType)) {
-    console.log('Hit!', callType);
     return sendPreOfferAnswer(
       constants.preOfferAnswer.CALL_UNAVAILABLE,
       callerSocketId
@@ -163,20 +158,17 @@ export const handlePreOffer = async (data) => {
 };
 
 const acceptCallHandler = () => {
-  console.log('Receiver accepted!');
   createPeerConnection();
   sendPreOfferAnswer(constants.preOfferAnswer.CALL_ACCEPTED);
   ui.showCallElements(connectedUserDetails.callType);
 };
 
 const rejectCallHandler = () => {
-  console.log('Receiver rejected!');
   setIncomingCallAvailable();
   sendPreOfferAnswer(constants.preOfferAnswer.CALL_REJECTED);
 };
 
 const callingDialogueRejectHandler = () => {
-  console.log('Caller cancelled connection!');
   const data = {
     connectedUserSocketId: connectedUserDetails.socketId,
   };
@@ -185,7 +177,6 @@ const callingDialogueRejectHandler = () => {
 };
 
 const sendPreOfferAnswer = (preOfferAnswer, callerSocketId = null) => {
-  console.log('pre offer answer:', preOfferAnswer);
   const data = {
     callerSocketId: callerSocketId
       ? callerSocketId
@@ -216,7 +207,6 @@ export const handlePreOfferAnswer = (data) => {
 };
 
 const sendWebRTCOffer = async () => {
-  console.log('Sending webRTC offer');
   const offer = await peerConnection.createOffer();
   await peerConnection.setLocalDescription(offer);
   wss.sendDataUsingWebRTCSignaling({
@@ -238,12 +228,10 @@ export const handleWebRTCOffer = async (data) => {
 };
 
 export const handleWebRTCAnswer = async (data) => {
-  console.log('Handling web RTC answer!');
   await peerConnection.setRemoteDescription(data.answer);
 };
 
 export const handleWebRTCCandidate = async (data) => {
-  console.log('handling webRTC candidates');
   try {
     await peerConnection.addIceCandidate(data.candidate);
   } catch (error) {
@@ -274,7 +262,6 @@ export const toggleScreenShare = async (screenSharingActive) => {
     ui.updateLocalVideo(localStream);
     ui.updateScreenShareButton(screenSharingActive);
   } else {
-    console.log('Toggle Screen share');
     try {
       screenSharingStream = await navigator.mediaDevices.getDisplayMedia({
         video: true,
@@ -331,9 +318,6 @@ const closePeerConnection = () => {
 
 const checkCallPossibility = (callType) => {
   const callState = store.getState().callState;
-
-  console.log('Checking callPossibility CallType: ', callType);
-  console.log('Checking callPossibility CallState: ', callState);
 
   if (callState === constants.callState.CALL_AVAILABLE) {
     return true;
